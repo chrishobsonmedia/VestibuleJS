@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+		<title>Vestibule JS Usage Example</title>
+		<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>				
+				
+		<style>
+			.main{
+				font-family:'arial';
+				color:#333333;			
+				padding:6rem;
+			}
+			.area{
+				margin-bottom:6rem;
+			}
+			@media screen and (max-width: 600px) {
+			    .main{
+					padding:2rem;
+				}
+			}
+		</style>		
+	</head>
+	
+	<body class="main">
+	
+		<section class="area">
+			<h1>Vestibule JS Usage Example</h1>
+			<p>
+				The "Vestibule" allows a team to define and map a public JavaScript API.  
+				Then, even without understanding module depenancies, JS file locations or managing a-synchronous lazying loading & timing issues, another team can simply use that API.    
+			</p>
+			<p>
+				The required files are automatically lazy loaded on-demand based on the usage of that API.
+			</p>
+		</section>
+		
+		<section class="area">
+			<div class="input-group">
+			<input id="user_input_a" class="form-control" type="text" name="message" value="Enter a message here!"></input>
+			<span class="input-group-btn">
+       			 <button id="btn_a" class="btn btn-primary" onclick="EXTERNAL_API_A( jQuery('#user_input_a').val(), jQuery('#output_a') );">Click Here Method A</button>
+  			 </span>
+  			 </div>
+  			 <div id="output_a"></div>
+		</section>
+
+		<section class="area">
+			<div class="input-group">
+			<input id="user_input_b" class="form-control" type="text" name="message" value="Enter a message here!"></input>
+			<span class="input-group-btn">
+       			 <button id="btn_b" class="btn btn-primary" onclick="EXTERNAL_API_B( jQuery('#user_input_b').val(), jQuery('#output_b') );">Click Here Method B</button>
+  			 </span>
+  			 </div>
+  			 <div id="output_b"></div>
+		</section>
+				
+				
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>		
+		<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+		
+		<!--
+	Vestibule JS
+		-->		
+		
+		<script src="vestibule.js"></script>
+		
+		<script>
+		
+			//define your teams public API here 
+			//vestibule( "Public Method Name[s]":String/Array , "ScriptLocation.js":String)
+			
+			vestibule(['EXTERNAL_API_A','EXTERNAL_API_B'],'external-api.js');
+		
+		</script>	
+		
+	</body>
+
+</html>

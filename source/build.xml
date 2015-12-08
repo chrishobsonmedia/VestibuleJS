@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project basedir="." default="build" name="Build Vestibule JS">
+
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="compiler.jar"/>
+	
+ 	<target name="build">
+   	
+  	<concat destfile="vestibule-temp.js"> 
+  		<!-- wrapper -->
+  		<header>(function(){</header> 		  
+  		<fileset dir=".">
+  		  	<include name="*.js"/>	  	
+  		</fileset>
+  		<!-- wrapper -->
+  		<footer>})();</footer>
+  	 </concat>  	
+
+  	<jscomp compilationLevel="simple" debug="false" output="vestibule-temp-min.js">	
+  		<sources dir=".">
+			<file name="vestibule-temp.js"/>
+		</sources>
+	</jscomp>  
+  
+ 	<concat destfile="../deploy/vestibule.min.js"> 
+ 	  	<fileset dir="../">
+ 	  		<include name="*.js"/>	  
+ 	  		<include name="source/vestibule-temp-min.js"/>	  
+ 	  	</fileset>
+ 	</concat>	  
+ 	<concat destfile="../deploy/vestibule.js"> 
+ 		<fileset dir="../">
+ 			<include name="*.js"/>	  
+ 		 	<include name="source/vestibule-temp.js"/>	  
+ 		</fileset>
+ 	</concat>
+ 		
+ 	<delete file="vestibule-temp.js"/>
+ 	<delete file="vestibule-temp-min.js"/>
+ 		
+  </target>
+</project>
